@@ -45,8 +45,14 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.txtCpf = new System.Windows.Forms.MaskedTextBox();
-            this.cmbFunção = new System.Windows.Forms.ComboBox();
+            this.cmbTipoAcesso = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txbUsuario = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txbSenha = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -62,7 +68,7 @@
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(69, 72);
+            this.txtNome.Location = new System.Drawing.Point(102, 72);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(174, 23);
             this.txtNome.TabIndex = 1;
@@ -72,7 +78,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(271, 24);
+            this.label2.Location = new System.Drawing.Point(338, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 15);
             this.label2.TabIndex = 2;
@@ -83,7 +89,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(24, 141);
+            this.label3.Location = new System.Drawing.Point(26, 136);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 15);
             this.label3.TabIndex = 4;
@@ -94,7 +100,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(266, 78);
+            this.label4.Location = new System.Drawing.Point(333, 78);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 15);
             this.label4.TabIndex = 7;
@@ -113,7 +119,7 @@
             // 
             // txtTelefone
             // 
-            this.txtTelefone.Location = new System.Drawing.Point(71, 192);
+            this.txtTelefone.Location = new System.Drawing.Point(100, 192);
             this.txtTelefone.Mask = "(00)00000-0000";
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(172, 23);
@@ -124,7 +130,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(271, 136);
+            this.label6.Location = new System.Drawing.Point(338, 136);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(36, 15);
             this.label6.TabIndex = 11;
@@ -132,16 +138,16 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(320, 133);
+            this.txtEmail.Location = new System.Drawing.Point(387, 133);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(189, 23);
+            this.txtEmail.Size = new System.Drawing.Size(174, 23);
             this.txtEmail.TabIndex = 10;
             // 
             // btnGravar
             // 
             this.btnGravar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnGravar.BackgroundImage")));
             this.btnGravar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnGravar.Location = new System.Drawing.Point(167, 274);
+            this.btnGravar.Location = new System.Drawing.Point(175, 347);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(93, 44);
             this.btnGravar.TabIndex = 12;
@@ -153,7 +159,7 @@
             // 
             this.btnCancelar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCancelar.BackgroundImage")));
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(266, 274);
+            this.btnCancelar.Location = new System.Drawing.Point(274, 347);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(97, 44);
             this.btnCancelar.TabIndex = 13;
@@ -165,17 +171,21 @@
             // 
             this.dtpDataNascimento.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.dtpDataNascimento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataNascimento.Location = new System.Drawing.Point(324, 16);
+            this.dtpDataNascimento.Location = new System.Drawing.Point(391, 16);
             this.dtpDataNascimento.Name = "dtpDataNascimento";
-            this.dtpDataNascimento.Size = new System.Drawing.Size(185, 23);
+            this.dtpDataNascimento.Size = new System.Drawing.Size(170, 23);
             this.dtpDataNascimento.TabIndex = 14;
             // 
             // cmbEstado
             // 
             this.cmbEstado.FormattingEnabled = true;
-            this.cmbEstado.Location = new System.Drawing.Point(320, 72);
+            this.cmbEstado.Items.AddRange(new object[] {
+            "Santa Catarina",
+            "Paraná",
+            "Rio Grande do Sul"});
+            this.cmbEstado.Location = new System.Drawing.Point(387, 72);
             this.cmbEstado.Name = "cmbEstado";
-            this.cmbEstado.Size = new System.Drawing.Size(189, 23);
+            this.cmbEstado.Size = new System.Drawing.Size(174, 23);
             this.cmbEstado.TabIndex = 15;
             // 
             // label8
@@ -192,46 +202,109 @@
             // txtNumero
             // 
             this.txtNumero.Enabled = false;
-            this.txtNumero.Location = new System.Drawing.Point(73, 19);
+            this.txtNumero.Location = new System.Drawing.Point(100, 19);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(62, 23);
             this.txtNumero.TabIndex = 21;
             // 
             // txtCpf
             // 
-            this.txtCpf.Location = new System.Drawing.Point(69, 133);
+            this.txtCpf.Location = new System.Drawing.Point(100, 133);
             this.txtCpf.Mask = "000.000.000-00";
             this.txtCpf.Name = "txtCpf";
             this.txtCpf.Size = new System.Drawing.Size(174, 23);
             this.txtCpf.TabIndex = 23;
             // 
-            // cmbFunção
+            // cmbTipoAcesso
             // 
-            this.cmbFunção.FormattingEnabled = true;
-            this.cmbFunção.Location = new System.Drawing.Point(320, 192);
-            this.cmbFunção.Name = "cmbFunção";
-            this.cmbFunção.Size = new System.Drawing.Size(189, 23);
-            this.cmbFunção.TabIndex = 24;
+            this.cmbTipoAcesso.FormattingEnabled = true;
+            this.cmbTipoAcesso.Items.AddRange(new object[] {
+            "Administrador",
+            "Usuário Geral"});
+            this.cmbTipoAcesso.Location = new System.Drawing.Point(387, 192);
+            this.cmbTipoAcesso.Name = "cmbTipoAcesso";
+            this.cmbTipoAcesso.Size = new System.Drawing.Size(174, 23);
+            this.cmbTipoAcesso.TabIndex = 24;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(271, 195);
+            this.label7.Location = new System.Drawing.Point(304, 195);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 15);
+            this.label7.Size = new System.Drawing.Size(72, 15);
             this.label7.TabIndex = 25;
-            this.label7.Text = "Função";
+            this.label7.Text = "Tipo Acesso";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(327, 245);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 15);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "Usuário";
+            // 
+            // txbUsuario
+            // 
+            this.txbUsuario.Location = new System.Drawing.Point(387, 242);
+            this.txbUsuario.Name = "txbUsuario";
+            this.txbUsuario.Size = new System.Drawing.Size(174, 23);
+            this.txbUsuario.TabIndex = 28;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(100, 242);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(174, 23);
+            this.textBox2.TabIndex = 30;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(14, 245);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 15);
+            this.label10.TabIndex = 29;
+            this.label10.Text = "Logradouro";
+            // 
+            // txbSenha
+            // 
+            this.txbSenha.Location = new System.Drawing.Point(385, 297);
+            this.txbSenha.Name = "txbSenha";
+            this.txbSenha.Size = new System.Drawing.Size(174, 23);
+            this.txbSenha.TabIndex = 32;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.Location = new System.Drawing.Point(325, 300);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 15);
+            this.label11.TabIndex = 31;
+            this.label11.Text = "Senha";
             // 
             // TelaCadastroPessoaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(521, 329);
+            this.ClientSize = new System.Drawing.Size(577, 403);
+            this.Controls.Add(this.txbSenha);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txbUsuario);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.cmbFunção);
+            this.Controls.Add(this.cmbTipoAcesso);
             this.Controls.Add(this.txtCpf);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtNumero);
@@ -277,7 +350,13 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.MaskedTextBox txtCpf;
-        private System.Windows.Forms.ComboBox cmbFunção;
+        private System.Windows.Forms.ComboBox cmbTipoAcesso;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txbUsuario;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txbSenha;
+        private System.Windows.Forms.Label label11;
     }
 }

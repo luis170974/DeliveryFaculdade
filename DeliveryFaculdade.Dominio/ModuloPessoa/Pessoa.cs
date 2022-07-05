@@ -12,7 +12,7 @@ namespace DeliveryFaculdade.Dominio.ModuloPessoa
 
         public string Cpf { get; set; }
 
-        public List<Estado> Estado { get; set; }
+        public string Estado { get; set; }
 
         public string Telefone { get; set; }
 
@@ -22,11 +22,30 @@ namespace DeliveryFaculdade.Dominio.ModuloPessoa
 
         public string Senha { get; set; }
 
-        public List<TipoPessoa> TipoDaPessoa { get; set; }
+        public string TipoDoAcesso { get; set; }
+
+        public string Logradouro { get; set; }
+
+        public int NumeroCasa { get; set; }
 
         public Pessoa()
         {
 
+        }
+
+        public Pessoa(string nome,DateTime dataNascimento, string cpf, string estado, string telefone, string email, string usuario, string senha, string tipoAcesso, string logradouro, int numeroCasa)
+        {
+            Nome = nome;
+            DataNascimento = dataNascimento;
+            Cpf = cpf;
+            Estado = estado;
+            Telefone = telefone;
+            Email = email;
+            Usuario = usuario;
+            Senha = senha;
+            TipoDoAcesso = tipoAcesso;
+            Logradouro = logradouro;
+            NumeroCasa = numeroCasa;
         }
 
 

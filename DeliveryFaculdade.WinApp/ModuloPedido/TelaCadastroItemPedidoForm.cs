@@ -13,16 +13,12 @@ namespace DeliveryFaculdade.WinApp.ModuloPedido
 {
     public partial class TelaCadastroItemPedidoForm : Form
     {
-        private readonly Pedido pedido;
-        public TelaCadastroItemPedidoForm(Pedido pedido)
+        public TelaCadastroItemPedidoForm()
         {
             InitializeComponent();
 
-            this.pedido = pedido;
 
-            labelTipoPedido.Text = pedido.TipoPedido;
-
-            foreach
+            
         }
 
 

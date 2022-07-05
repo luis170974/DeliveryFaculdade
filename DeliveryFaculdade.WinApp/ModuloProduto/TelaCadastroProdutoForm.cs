@@ -1,4 +1,5 @@
 ﻿using DeliveryFaculdade.Dominio.ModuloProduto;
+using DeliveryFaculdade.Infra.BancoDados.ModuloProduto;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace DeliveryFaculdade.WinApp.ModuloProduto
 
         public Produto produto;
 
-        public IRepositorioProduto repositorioProduto;
+        public RepositorioProdutoEmBancoDados repositorioProduto;
         public Produto Produto
         {
             get
@@ -37,7 +38,7 @@ namespace DeliveryFaculdade.WinApp.ModuloProduto
             set
             {
                 produto = value;
-                txbPreco.Text = produto.Numero.ToString();
+                txbPreco.Text = produto.Id.ToString();
                 txbNome.Text = produto.Nome;
                 txbQuantidade.Text = produto.Quantidade.ToString();
                 txbPreco.Text = produto.Preco.ToString("C");

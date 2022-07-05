@@ -1,4 +1,5 @@
 ﻿using DeliveryFaculdade.Dominio.ModuloPedido;
+using DeliveryFaculdade.Infra.BancoDados.Compartilhado;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -6,43 +7,43 @@ using System.Data.SqlClient;
 
 namespace DeliveryFaculdade.Infra.Arquivos.ModuloPedido
 {
-    public class RepositorioPedidoEmBancoDados : IRepositorioPedido
+    public class RepositorioPedidoEmBancoDados : ConexaoBancoDados<Pedido>, IRepositorio<Pedido>
     {
-        private const string enderecoBanco =
-       @"Data Source=(LocalDB)\MSSqlLocalDB;
-       Initial Catalog=deliveryFaculdadeDb;
-       Integrated Security=True;
-       Pooling=False";
+
 
         private const string sqlInserir =
-        @"INSERT INTO [TBDISCIPLINA]
+        @"INSERT INTO [TBPEDIDO]
                 (
-                    TIPO_PEDIDO                 
+                    TIPO_PEDIDO,
+                    PESSOA_ID,
+                    VALORPEDIDO,
+                    DATAPEDIDO
                 )
             VALUES
                 (
-                    @TIPOPEDIDO
+                    @TIPO_PEDIDO,
+                    @PESSOA_ID,
+                    @VALORPEDIDO,
+                    @DATAPEDIDO
 
                 ); 
                 SELECT SCOPE_IDENTITY();";
 
-        private const string sqlSelecionarTodos =
-          @"SELECT                 
-                PD.NUMERO,       
-                PD.TIPO_PEDIDO,
-                PD.NUMERO_PESSOA,
-                PD.VALORPEDIDO,
-                PD.DATAPEDIDO,
-                PA.NUMERO,
-                PA.NOME,
-                PA.TIPO_PESSOA,
-                PA.CPF
+        private const string sqlEditar = @"UPDATE[TBPEDIDO] SET
 
-            FROM
-                TBPEDIDO PD INNER JOIN TBPESSOA PA
-            ON
-                
-                PA.NUMERO = PD.NUMERO_PESSOA";
+                    TIPO_PEDIDO = @TIPO_PEDIDO,
+                    PESSOA_ID   = @PESSOA_ID,
+                    VALORPEDIDO = @VALORPEDIDO,
+                    DATAPEDIDO  = @DATAPEDIDO
+
+                   WHERE
+                         ID = @ID";
+
+        private const string sqlExcluir = @"DELETE FROM TBPEDIDO WHERE ID = @ID";
+
+        private const string sqlSelecionarPorId = @"SELECT * FROM TBPEDIDO WHERE ID = @ID";
+
+        private const string sqlSelecionarTodos = @"SELECT * FROM TBPEDIDO";
 
         public ValidationResult Inserir(Pedido novoRegistro)
         {
@@ -64,18 +65,18 @@ namespace DeliveryFaculdade.Infra.Arquivos.ModuloPedido
         }
 
 
-        public Pedido SelecionarPorNumero(int numero)
+        public Pedido SelecionarPorId(int numero)
         {
             throw new System.NotImplementedException();
         }
 
         public List<Pedido> SelecionarTodos()
         {
-            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+            ConectarBancoDados();
 
-            SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarTodos, conexaoComBanco);
+            SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarTodos);
 
-            conexaoComBanco.Open();
+            
             SqlDataReader leitorPedido = comandoSelecao.ExecuteReader();
 
             List<Pedido> pedidos = new List<Pedido>();
@@ -87,7 +88,7 @@ namespace DeliveryFaculdade.Infra.Arquivos.ModuloPedido
                 pedidos.Add(pedido);
             }
 
-            conexaoComBanco.Close();
+            DesconectarBancoDados();
 
             return pedidos;
         }
@@ -96,5 +97,7 @@ namespace DeliveryFaculdade.Infra.Arquivos.ModuloPedido
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

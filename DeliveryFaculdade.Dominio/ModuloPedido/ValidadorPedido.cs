@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using DeliveryFaculdade.Dominio.Compartilhado;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DeliveryFaculdade.Dominio.ModuloPedido
 {
-    public class ValidadorPedido : AbstractValidator<Pedido>
+    public class ValidadorPedido : ValidadorBase<Pedido>
     {
         public ValidadorPedido()
         {
@@ -23,10 +24,6 @@ namespace DeliveryFaculdade.Dominio.ModuloPedido
             RuleFor(x => x.ValorPedido)
                 .NotNull()
                 .NotEmpty();
-
-            RuleFor(x => x.TipoDaPessoa)
-             .NotNull()
-             .NotEmpty();
  
         }
     }

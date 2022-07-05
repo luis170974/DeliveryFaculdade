@@ -1,5 +1,6 @@
 ﻿
 using DeliveryFaculdade.Dominio.ModuloProduto;
+using DeliveryFaculdade.Infra.BancoDados.ModuloProduto;
 using DeliveryFaculdade.WinApp.Compartilhado;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,10 @@ namespace DeliveryFaculdade.WinApp.ModuloProduto
 {
     public class ControladorProduto : ControladorBase
     {
-        private readonly IRepositorioProduto repositorioProduto;
+        private readonly RepositorioProdutoEmBancoDados repositorioProduto;
         private TabelaProdutosControl tabelaProdutos;
 
-        public ControladorProduto(IRepositorioProduto repositorioProduto)
+        public ControladorProduto(RepositorioProdutoEmBancoDados repositorioProduto)
         {
             this.repositorioProduto = repositorioProduto;
         }
@@ -85,7 +86,7 @@ namespace DeliveryFaculdade.WinApp.ModuloProduto
         {
                 var numeroProduto = tabelaProdutos.ObtemNumeroProdutoSelecionado();
 
-                return repositorioProduto.SelecionarPorNumero((int)numeroProduto);
+                return repositorioProduto.SelecionarPorId((int)numeroProduto);
             
         }
 

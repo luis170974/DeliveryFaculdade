@@ -46,7 +46,7 @@ namespace DeliveryFaculdade.WinApp.ModuloPessoa
 
             foreach (Pessoa pessoa in pessoas)
             {
-                grid.Rows.Add(pessoa.Numero, pessoa.Nome, pessoa.DataNascimento, pessoa.Cpf);
+                grid.Rows.Add(pessoa.Id, pessoa.Nome, pessoa.DataNascimento, pessoa.Cpf);
             }
         }
 

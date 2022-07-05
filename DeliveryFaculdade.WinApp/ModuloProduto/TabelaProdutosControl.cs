@@ -47,7 +47,7 @@ namespace DeliveryFaculdade.WinApp.ModuloProduto
 
             foreach (Produto p in produtos)
             {
-                grid.Rows.Add(p.Numero, p.Nome, p.Preco, p.Quantidade);
+                grid.Rows.Add(p.Id, p.Nome, p.Preco, p.Quantidade);
             }
         }
 

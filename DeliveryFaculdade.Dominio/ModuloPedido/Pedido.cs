@@ -18,8 +18,6 @@ namespace DeliveryFaculdade.Dominio.ModuloPedido
 
         public DateTime DataDoPedido { get; set; }
 
-        public TipoPessoa TipoDaPessoa { get; set; }
-
         public Pedido()
         {
             DataDoPedido = DateTime.Now;
@@ -29,7 +27,7 @@ namespace DeliveryFaculdade.Dominio.ModuloPedido
 
         public override void Atualizar(Pedido registro)
         {
-            Numero = registro.Numero;
+            Id = registro.Id;
             TipoPedido = registro.TipoPedido;
             ValorPedido = registro.ValorPedido;
             Pessoa = registro.Pessoa;

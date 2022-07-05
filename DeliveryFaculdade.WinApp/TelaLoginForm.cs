@@ -31,7 +31,7 @@ namespace DeliveryFaculdade.WinApp
 
         string sql = @"SELECT 
 	            NUMERO,
-				USUARIO,
+				LOGIN,
 				SENHA
 
 
@@ -86,14 +86,12 @@ namespace DeliveryFaculdade.WinApp
 
                         telaMenu.Show();
                     }
-                }
 
-                else
-                {
-                    MessageBox.Show("Usuário e senha não confere.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        MessageBox.Show("Usuário e senha não confere.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-             
-
 
 
         }

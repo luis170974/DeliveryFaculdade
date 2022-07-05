@@ -40,14 +40,14 @@ namespace DeliveryFaculdade.WinApp.ModuloPessoa
             set
             {
                 pessoa = value;
-                txtNumero.Text = pessoa.Numero.ToString();
+                txtNumero.Text = pessoa.Id.ToString();
                 txtNome.Text = pessoa.Nome;
                 txtCpf.Text = pessoa.Cpf;
                 txtTelefone.Text = pessoa.Telefone;
                 txtEmail.Text = pessoa.Email;
                 dtpDataNascimento.Value = pessoa.DataNascimento;
                 cmbEstado.SelectedItem = pessoa.Estado;
-                cmbFunção.SelectedItem = pessoa.TipoDaPessoa;
+                cmbTipoAcesso.SelectedItem = pessoa.TipoDoAcesso;
 
 
             }
@@ -59,6 +59,16 @@ namespace DeliveryFaculdade.WinApp.ModuloPessoa
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RetornarFuncoesPessoa()
+        {
+
+        }
+
+        private void RetornarEstadosPessoa()
         {
 
         }

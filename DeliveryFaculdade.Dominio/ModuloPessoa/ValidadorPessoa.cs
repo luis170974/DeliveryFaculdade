@@ -1,9 +1,10 @@
-﻿using FluentValidation;
+﻿using DeliveryFaculdade.Dominio.Compartilhado;
+using FluentValidation;
 using System;
 
 namespace DeliveryFaculdade.Dominio.ModuloPessoa
 {
-    public class ValidadorPessoa : AbstractValidator<Pessoa>
+    public class ValidadorPessoa : ValidadorBase<Pessoa>
     {
         public ValidadorPessoa()
         {

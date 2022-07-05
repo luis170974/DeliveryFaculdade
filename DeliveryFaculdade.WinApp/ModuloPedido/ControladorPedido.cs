@@ -1,5 +1,7 @@
 ﻿using DeliveryFaculdade.Dominio.ModuloPedido;
 using DeliveryFaculdade.Dominio.ModuloPessoa;
+using DeliveryFaculdade.Infra.Arquivos.ModuloPedido;
+using DeliveryFaculdade.Infra.BancoDados.ModuloPessoa;
 using DeliveryFaculdade.WinApp.Compartilhado;
 using DeliveryFaculdade.WinApp.ModuloPessoa;
 using System;
@@ -13,11 +15,11 @@ namespace DeliveryFaculdade.WinApp.ModuloPedido
 {
     public class ControladorPedido : ControladorBase
     {
-        private readonly IRepositorioPedido repositorioPedido;
-        private readonly IRepositorioPesssoa repositorioPessoa;
+        private readonly RepositorioPedidoEmBancoDados repositorioPedido;
+        private readonly RepositorioPessoaEmBancoDados repositorioPessoa;
         private TabelaPedidosControl tabelaPedidos;
 
-        public ControladorPedido(IRepositorioPedido repositorioPedido, IRepositorioPesssoa repositorio)
+        public ControladorPedido(RepositorioPedidoEmBancoDados repositorioPedido, RepositorioPessoaEmBancoDados repositorio)
         {
             this.repositorioPedido = repositorioPedido;
             this.repositorioPessoa = repositorio;

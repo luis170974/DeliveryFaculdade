@@ -1,6 +1,8 @@
 ﻿using DeliveryFaculdade.Dominio.ModuloPedido;
 using DeliveryFaculdade.Dominio.ModuloPessoa;
 using DeliveryFaculdade.Dominio.ModuloProduto;
+using DeliveryFaculdade.Infra.BancoDados.Compartilhado;
+using DeliveryFaculdade.Infra.BancoDados.ModuloPessoa;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -32,7 +34,7 @@ namespace DeliveryFaculdade.WinApp.ModuloPedido
 
         public List<Pessoa> pessoas;
 
-        public IRepositorioPesssoa repositorioPessoa;
+        public RepositorioPessoaEmBancoDados repositorioPessoa;
 
         private Pedido pedido;
 
@@ -49,8 +51,7 @@ namespace DeliveryFaculdade.WinApp.ModuloPedido
             set
             {
                 pedido = value;
-                txtNumero.Text = pedido.Numero.ToString();
-                lblPedido.Text = pedido.TipoPedido;
+                txtNumero.Text = pedido.Id.ToString();
                 lblValorPedido.Text = pedido.ValorPedido.ToString();
                 
                 
@@ -69,18 +70,6 @@ namespace DeliveryFaculdade.WinApp.ModuloPedido
 
         }
 
-        private void CarregarFuncionariosComboBox()
-        {
-            cmbAtendente.Items.Clear();
-
-            List<Pessoa> pessoas = repositorioPessoa.SelecionarTodos();
-
-            foreach (Pessoa p in pessoas)
-            {
-                cmbAtendente.Items.Add(p.TipoDaPessoa.Contains(TipoPessoa.Funcionario));
-            }
-        }
-
         private void CarregarPessoasComboBox()
         {
             cmbPessoa.Items.Clear();
@@ -89,7 +78,7 @@ namespace DeliveryFaculdade.WinApp.ModuloPedido
 
             foreach (Pessoa p in pessoas)
             {
-                cmbAtendente.Items.Add(p.Nome);
+                cmbPessoa.Items.Add(p.Nome);
             }
         }
     }
