@@ -1,4 +1,5 @@
-﻿using DeliveryFaculdade.Dominio.ModuloPedido;
+﻿using DeliveryFaculdade.Dominio.Compartilhado;
+using DeliveryFaculdade.Dominio.ModuloPedido;
 using DeliveryFaculdade.Infra.BancoDados.Compartilhado;
 using FluentValidation.Results;
 using System;
@@ -45,59 +46,73 @@ namespace DeliveryFaculdade.Infra.Arquivos.ModuloPedido
 
         private const string sqlSelecionarTodos = @"SELECT * FROM TBPEDIDO";
 
-        public ValidationResult Inserir(Pedido novoRegistro)
+        public ValidationResult Inserir(Pedido entidade)
         {
-            var validador = new ValidadorPedido();
-
-            var resultadoValidacao = validador.Validate(novoRegistro);
-
-            return resultadoValidacao;
+            throw new NotImplementedException();
         }
 
-        public ValidationResult Editar(Pedido registro)
+        public ValidationResult Editar(Pedido entidade)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public ValidationResult Excluir(Pedido registro)
-        {
-            throw new System.NotImplementedException();
-        }
-
-
-        public Pedido SelecionarPorId(int numero)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public List<Pedido> SelecionarTodos()
-        {
-            ConectarBancoDados();
-
-            SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarTodos);
-
-            
-            SqlDataReader leitorPedido = comandoSelecao.ExecuteReader();
-
-            List<Pedido> pedidos = new List<Pedido>();
-
-            while (leitorPedido.Read())
-            {
-                Pedido pedido = ConverterParaPedido(leitorPedido);
-
-                pedidos.Add(pedido);
-            }
-
-            DesconectarBancoDados();
-
-            return pedidos;
-        }
-
-        private Pedido ConverterParaPedido(SqlDataReader leitorPedido)
+        public ValidationResult Excluir(Pedido entidade)
         {
             throw new NotImplementedException();
         }
 
 
+
+        public List<Pedido> SelecionarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Pedido SelecionarUnico(int numero)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        protected override void InserirRegistroBancoDados(Pedido entidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void EditarRegistroBancoDados(Pedido entidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void ExcluirRegistroBancoDados(Pedido entidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void DefinirParametros(Pedido entidade, SqlCommand cmd_Insercao)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        protected override ValidationResult Validar(Pedido entidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override List<Pedido> LerTodos(SqlDataReader leitor)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Pedido LerUnico(SqlDataReader leitor)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool VerificarDuplicidade(string novoTexto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

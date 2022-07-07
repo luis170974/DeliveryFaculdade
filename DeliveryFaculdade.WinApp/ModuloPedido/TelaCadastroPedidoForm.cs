@@ -70,16 +70,5 @@ namespace DeliveryFaculdade.WinApp.ModuloPedido
 
         }
 
-        private void CarregarPessoasComboBox()
-        {
-            cmbPessoa.Items.Clear();
-
-            List<Pessoa> pessoas = repositorioPessoa.SelecionarTodos();
-
-            foreach (Pessoa p in pessoas)
-            {
-                cmbPessoa.Items.Add(p.Nome);
-            }
-        }
     }
 }

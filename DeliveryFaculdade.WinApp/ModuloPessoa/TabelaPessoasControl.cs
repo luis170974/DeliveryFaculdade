@@ -26,13 +26,23 @@ namespace DeliveryFaculdade.WinApp.ModuloPessoa
         {
             var colunas = new DataGridViewColumn[]
             {
-                new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Número"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Id", HeaderText = "Número"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Nome", HeaderText = "Nome da Pessoa"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "NomePessoa", HeaderText = "Nome da Pessoa"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "DataNascimento", HeaderText = "Data De Nascimento"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "DataString", HeaderText = "Data De Nascimento"},
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Cpf", HeaderText = "CPF da Pessoa"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Estado", HeaderText = "Estado"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Telefone", HeaderText = "Telefone"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "TipoDoAcesso", HeaderText = "TipoDoAcesso"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "Logradouro", HeaderText = "Logradouro"},
+
+                new DataGridViewTextBoxColumn { DataPropertyName = "NumeroCasa", HeaderText = "Numero da Casa"},
 
 
             };
@@ -42,12 +52,7 @@ namespace DeliveryFaculdade.WinApp.ModuloPessoa
 
         public void AtualizarRegistros(List<Pessoa> pessoas)
         {
-            grid.Rows.Clear();
-
-            foreach (Pessoa pessoa in pessoas)
-            {
-                grid.Rows.Add(pessoa.Id, pessoa.Nome, pessoa.DataNascimento, pessoa.Cpf);
-            }
+            grid.DataSource = pessoas;
         }
 
         public object ObtemNumeroPessoaSelecionada()

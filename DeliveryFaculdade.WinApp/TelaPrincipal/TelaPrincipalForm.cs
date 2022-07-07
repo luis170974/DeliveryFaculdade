@@ -53,7 +53,10 @@ namespace DeliveryFaculdade.WinApp
             ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
-
+        private void pessoasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
+        }
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
@@ -138,6 +141,7 @@ namespace DeliveryFaculdade.WinApp
 
             controladores.Add("Pedidos", new ControladorPedido(repositorioPedido, repositorioPessoa));
             controladores.Add("Produtos", new ControladorProduto(repositorioProduto));
+            controladores.Add("Pessoas", new ControladorPessoa(repositorioPessoa));
 
         }
 

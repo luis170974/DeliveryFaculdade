@@ -1,4 +1,5 @@
 ﻿using DeliveryFaculdade.Dominio.ModuloPessoa;
+using DeliveryFaculdade.Infra.BancoDados.ModuloPessoa;
 using DeliveryFaculdade.WinApp.Compartilhado;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,10 @@ namespace DeliveryFaculdade.WinApp.ModuloPessoa
 {
     public class ControladorPessoa : ControladorBase
     {
-        private readonly IRepositorioPesssoa repositorioPessoa;
+        private readonly RepositorioPessoaEmBancoDados repositorioPessoa;
         private TabelaPessoasControl tabelaPessoas;
 
-        public ControladorPessoa(IRepositorioPesssoa repositorioPessoa)
+        public ControladorPessoa(RepositorioPessoaEmBancoDados repositorioPessoa)
         {
             this.repositorioPessoa = repositorioPessoa;
         }
@@ -22,7 +23,7 @@ namespace DeliveryFaculdade.WinApp.ModuloPessoa
         public override void Inserir()
         {
             TelaCadastroPessoaForm tela = new TelaCadastroPessoaForm();
-            tela.Pessoa = new Pessoa();
+            tela.Pessoa = new();
 
             tela.GravarRegistro = repositorioPessoa.Inserir;
 
@@ -88,7 +89,7 @@ namespace DeliveryFaculdade.WinApp.ModuloPessoa
         {
             var numeroPessoa = tabelaPessoas.ObtemNumeroPessoaSelecionada();
 
-            return repositorioPessoa.SelecionarPorNumero((int)numeroPessoa);
+            return repositorioPessoa.Selecionar((int)numeroPessoa);
         }
 
         public override ConfiguracaoToolboxBase ObtemConfiguracaoToolbox()
@@ -112,7 +113,7 @@ namespace DeliveryFaculdade.WinApp.ModuloPessoa
             List<Pessoa> pessoas = repositorioPessoa.SelecionarTodos();
 
                 tabelaPessoas.AtualizarRegistros(pessoas);
-                TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {pessoas.Count} pessoa(s) {pessoas}");
+                TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {pessoas.Count} pessoa(s)");
             
         }
     }

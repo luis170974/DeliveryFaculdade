@@ -1,5 +1,6 @@
 ﻿using DeliveryFaculdade.Dominio.ModuloProduto;
 using DeliveryFaculdade.Infra.BancoDados.ModuloProduto;
+using DeliveryFaculdade.WinApp.Compartilhado;
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
@@ -38,26 +39,56 @@ namespace DeliveryFaculdade.WinApp.ModuloProduto
             set
             {
                 produto = value;
-                txbPreco.Text = produto.Id.ToString();
+                txbNumero.Text = produto.Id.ToString();
                 txbNome.Text = produto.Nome;
-                txbQuantidade.Text = produto.Quantidade.ToString();
-                txbPreco.Text = produto.Preco.ToString("C");
+                txbQuantidade.Text = produto.Quantidade;
+                txbPreco.Text = produto.Preco;
 
 
             }
         }
 
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnGravar_Click(object sender, EventArgs e)
         {
+            produto.Nome = txbNome.Text;
+            produto.Quantidade = txbQuantidade.Text;
+            produto.Preco = txbPreco.Text;
+
+            ValidationResult resultadoValidacao = GravarRegistro(produto);
+
+            if (resultadoValidacao.IsValid == false)
+            {
+                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                TelaPrincipalForm.Instancia.AtualizarRodape(erro);
+
+                DialogResult = DialogResult.None;
+            }
 
         }
 
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            txbNome.Clear();
+            txbPreco.Clear();
+            txbQuantidade.Clear();
+        }
 
+
+
+        private void txbQuantidade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidadorCampos.ImpedirLetrasCharEspeciais(e);
+        }
+
+        private void txbPreco_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidadorCampos.ImpedirLetrasCharEspeciais(e);
+        }
+
+        private void txbNome_KeyPress(object sender, KeyPressEventArgs e)
+        { 
+            e = ValidadorCampos.ImpedirNumeroECharsEspeciaisTextBox(e);
+        }
     }
 }

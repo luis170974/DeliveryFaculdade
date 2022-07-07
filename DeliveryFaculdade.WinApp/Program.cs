@@ -19,7 +19,7 @@ namespace DeliveryFaculdade.WinApp
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TelaLoginForm());
+            Application.Run(new TelaPrincipalForm());
 
         }
 

@@ -24,7 +24,7 @@ namespace DeliveryFaculdade.WinApp.ModuloProduto
         public override void Inserir()
         {
             TelaCadastroProdutoForm tela = new TelaCadastroProdutoForm();
-            tela.Produto = new Produto();
+            tela.Produto = new();
 
             tela.GravarRegistro = repositorioProduto.Inserir;
 
@@ -86,7 +86,7 @@ namespace DeliveryFaculdade.WinApp.ModuloProduto
         {
                 var numeroProduto = tabelaProdutos.ObtemNumeroProdutoSelecionado();
 
-                return repositorioProduto.SelecionarPorId((int)numeroProduto);
+                return repositorioProduto.SelecionarUnico((int)numeroProduto);
             
         }
 

@@ -1,4 +1,5 @@
-﻿using DeliveryFaculdade.Dominio.ModuloProduto;
+﻿using DeliveryFaculdade.Dominio.Compartilhado;
+using DeliveryFaculdade.Dominio.ModuloProduto;
 using DeliveryFaculdade.Infra.BancoDados.Compartilhado;
 using FluentValidation.Results;
 using System;
@@ -10,27 +11,91 @@ using System.Threading.Tasks;
 
 namespace DeliveryFaculdade.Infra.BancoDados.ModuloProduto
 {
-    public class RepositorioProdutoEmBancoDados : RepositorioBase<Produto, MapeadorProduto, ValidadorProduto>
+    public class RepositorioProdutoEmBancoDados : ConexaoBancoDados<Produto>, IRepositorio<Produto>
     {
 
+        public ValidationResult Inserir(Produto entidade)
+        {
+            ValidationResult resultado = Validar(entidade);
+
+            if (resultado.IsValid)
+                InserirRegistroBancoDados(entidade);
+
+            return resultado;
+        }
+
+        public ValidationResult Editar(Produto entidade)
+        {
+            ValidationResult resultado = Validar(entidade);
+
+            if (resultado.IsValid)
+                EditarRegistroBancoDados(entidade);
+
+            return resultado;
+        }
+
+        public ValidationResult Excluir(Produto entidade)
+        {
+            ValidationResult resultado = Validar(entidade);
+
+            if (resultado.IsValid)
+                ExcluirRegistroBancoDados(entidade);
+
+            return resultado;
+        }
 
 
-        protected override string Sql_insercao => @"INSERT INTO [TBPRODUTO]
-                (
-                    NOME,
-                    PRECO,
-                    QUANTIDADE
-                )
-            VALUES
-                (
-                    @NOME
-                    @PRECO
-                    @QUANTIDADE
 
-                ); 
-                SELECT SCOPE_IDENTITY();";
+        public List<Produto> SelecionarTodos()
+        {
+            ConectarBancoDados();
 
-        protected override string Sql_edicao => @"UPDATE[TBPRODUTO] SET
+            sql = @"SELECT * FROM TBPRODUTO";
+
+            SqlCommand cmd_Selecao = new(sql, conexao);
+
+            SqlDataReader leitor = cmd_Selecao.ExecuteReader();
+
+            List<Produto> produtos = LerTodos(leitor);
+
+            DesconectarBancoDados();
+
+            return produtos;
+        }
+
+        public Produto SelecionarUnico(int numero)
+        {
+            ConectarBancoDados();
+
+            sql = @"SELECT * FROM TBPRODUTO WHERE ID = @ID";
+
+            SqlCommand cmdSelecao = new(sql, conexao);
+
+            cmdSelecao.Parameters.AddWithValue("ID", numero);
+
+            SqlDataReader leitor = cmdSelecao.ExecuteReader();
+
+            Produto selecionado = LerUnico(leitor);
+
+            DesconectarBancoDados();
+
+            return selecionado;
+        }
+
+        #region metodos protected
+        protected override void DefinirParametros(Produto entidade, SqlCommand cmd)
+        {
+            cmd.Parameters.AddWithValue("NOME", entidade.Nome);
+            cmd.Parameters.AddWithValue("PRECO", entidade.Preco);
+            cmd.Parameters.AddWithValue("QUANTIDADE", entidade.Quantidade);
+
+        }
+
+        protected override void EditarRegistroBancoDados(Produto entidade)
+        {
+            ConectarBancoDados();
+
+            sql = @"UPDATE[TBPRODUTO] SET
 
                     NOME = @NOME,
                     PRECO = @PRECO,
@@ -39,60 +104,118 @@ namespace DeliveryFaculdade.Infra.BancoDados.ModuloProduto
                    WHERE
                          ID = @ID";
 
-        protected override string Sql_exclusao => @"DELETE FROM TBPRODUTO WHERE ID = @ID";
+            SqlCommand cmd_Edicao = new(sql, conexao);
 
-        protected override string Sql_selecao_por_id => @"SELECT * FROM TBPRODUTO WHERE ID = @ID";
+            DefinirParametros(entidade, cmd_Edicao);
 
-        protected override string Sql_selecao_todos => @"SELECT * FROM TBPRODUTO";
+            cmd_Edicao.ExecuteNonQuery();
 
-        public ValidationResult Inserir(Produto novoRegistro)
-        {
-            ValidationResult resultado = Validar(novoRegistro)
-        }
-        public ValidationResult Editar(Produto registro)
-        {
-            throw new NotImplementedException();
+            DesconectarBancoDados();
         }
 
-        public ValidationResult Excluir(Produto registro)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Produto SelecionarPorId(int numero)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Produto> SelecionarTodos()
+        protected override void ExcluirRegistroBancoDados(Produto entidade)
         {
             ConectarBancoDados();
 
-            SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarTodos);
+            sql = @"DELETE FROM TBPRODUTO WHERE ID = @ID";
 
+            SqlCommand cmd_Exclusao = new(sql, conexao);
 
-            SqlDataReader leitorPedido = comandoSelecao.ExecuteReader();
+            cmd_Exclusao.Parameters.AddWithValue("ID", entidade.Id);
 
-            List<Produto> produtos = new List<Produto>();
+            cmd_Exclusao.ExecuteNonQuery();
 
-            while (leitorPedido.Read())
+            DesconectarBancoDados();
+        }
+
+        protected override void InserirRegistroBancoDados(Produto entidade)
+        {
+            ConectarBancoDados();
+
+            sql = @"INSERT INTO [TBPRODUTO]
+                (
+                    NOME,
+                    PRECO,
+                    QUANTIDADE
+                )
+            VALUES
+                (
+                    @NOME,
+                    @PRECO,
+                    @QUANTIDADE
+
+                ); 
+                SELECT SCOPE_IDENTITY();";
+
+            SqlCommand cmd_Insercao = new(sql, conexao);
+
+            DefinirParametros(entidade, cmd_Insercao);
+
+            cmd_Insercao.ExecuteNonQuery();
+
+            entidade.Id = Convert.ToInt32(cmd_Insercao.ExecuteScalar());
+
+            DesconectarBancoDados();
+        }
+
+        protected override List<Produto> LerTodos(SqlDataReader leitor)
+        {
+            List<Produto> produtos = new();
+
+            while (leitor.Read())
             {
-                Produto produto = ConverterParaProduto(leitorPedido);
+                int id = Convert.ToInt32(leitor["ID"]);
+                string nome = leitor["NOME"].ToString();
+                string preco = leitor["PRECO"].ToString();
+                string quantidade = leitor["QUANTIDADE"].ToString();
+
+
+                Produto produto = new Produto(nome, preco, quantidade )
+                {
+                    Id = id
+                };
 
                 produtos.Add(produto);
             }
 
-            DesconectarBancoDados();
-
             return produtos;
+        }
+
+        protected override Produto LerUnico(SqlDataReader leitor)
+        {
+            Produto produto = null;
+
+            if (leitor.Read())
+            {
+                int id = Convert.ToInt32(leitor["ID"]);
+                string nome = leitor["NOME"].ToString();
+                string preco = leitor["PRECO"].ToString();
+                string quantidade = leitor["QUANTIDADE"].ToString();
+
+                produto = new Produto(nome, preco, quantidade)
+                {
+                    Id = id
+                };
+            }
+
+            return produto;
         }
 
         protected override ValidationResult Validar(Produto entidade)
         {
-            return new ValidadorFornecedor().Validate(entidade);
+            return new ValidadorProduto().Validate(entidade);
         }
 
+        protected override bool VerificarDuplicidade(string novoTexto)
+        {
+            var todos = SelecionarTodos();
 
+            if (todos.Count != 0)
+                return todos.Exists(x => x.Equals(novoTexto));
 
+            return false;
+        }
+
+        #endregion
     }
 }

@@ -47,7 +47,7 @@ namespace DeliveryFaculdade.WinApp.ModuloPedido
 
             foreach (Pedido pedido in pedidos)
             {
-                grid.Rows.Add(pedido.Id, pedido.TipoPedido, pedido.DataDoPedido, pedido.ValorPedido, pedido.TipoDaPessoa);
+                grid.Rows.Add(pedido.Id, pedido.TipoPedido, pedido.DataDoPedido, pedido.ValorPedido);
             }
         }
 

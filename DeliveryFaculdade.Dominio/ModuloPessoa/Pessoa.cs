@@ -6,7 +6,7 @@ namespace DeliveryFaculdade.Dominio.ModuloPessoa
 {
     public class Pessoa : EntidadeBase<Pessoa>
     {
-        public string Nome { get; set; }
+        public string NomePessoa { get; set; }
 
         public DateTime DataNascimento { get; set; }
 
@@ -26,16 +26,16 @@ namespace DeliveryFaculdade.Dominio.ModuloPessoa
 
         public string Logradouro { get; set; }
 
-        public int NumeroCasa { get; set; }
+        public string NumeroCasa { get; set; }
 
         public Pessoa()
         {
 
         }
 
-        public Pessoa(string nome,DateTime dataNascimento, string cpf, string estado, string telefone, string email, string usuario, string senha, string tipoAcesso, string logradouro, int numeroCasa)
+        public Pessoa(string nome, DateTime dataNascimento, string cpf, string estado, string telefone, string usuario, string senha, string tipoAcesso, string email, string logradouro, string numeroCasa)
         {
-            Nome = nome;
+            NomePessoa = nome;
             DataNascimento = dataNascimento;
             Cpf = cpf;
             Estado = estado;
@@ -49,6 +49,13 @@ namespace DeliveryFaculdade.Dominio.ModuloPessoa
         }
 
 
+        public string DataString
+        {
+            get
+            {
+                return DataNascimento.ToShortDateString();
+            }
+        }
 
         public override void Atualizar(Pessoa registro)
         {

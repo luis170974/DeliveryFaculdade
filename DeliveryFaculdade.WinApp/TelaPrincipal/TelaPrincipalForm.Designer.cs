@@ -45,6 +45,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelRegistros = new System.Windows.Forms.Panel();
+            this.pessoasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.toolbox.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -65,6 +66,7 @@
             // 
             this.cadastrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pedidosMenuItem,
+            this.pessoasToolStripMenuItem,
             this.produtosMenuItem,
             this.cadastrosToolStripMenuItem1});
             this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
@@ -75,21 +77,21 @@
             // 
             this.pedidosMenuItem.Name = "pedidosMenuItem";
             this.pedidosMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.pedidosMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.pedidosMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pedidosMenuItem.Text = "Pedidos";
             this.pedidosMenuItem.Click += new System.EventHandler(this.pedidosMenuItem_Click);
             // 
             // produtosMenuItem
             // 
             this.produtosMenuItem.Name = "produtosMenuItem";
-            this.produtosMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.produtosMenuItem.Size = new System.Drawing.Size(180, 22);
             this.produtosMenuItem.Text = "Produtos";
             this.produtosMenuItem.Click += new System.EventHandler(this.produtosMenuItem_Click);
             // 
             // cadastrosToolStripMenuItem1
             // 
             this.cadastrosToolStripMenuItem1.Name = "cadastrosToolStripMenuItem1";
-            this.cadastrosToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
+            this.cadastrosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.cadastrosToolStripMenuItem1.Text = "Cadastros";
             // 
             // toolbox
@@ -197,6 +199,13 @@
             this.panelRegistros.Size = new System.Drawing.Size(929, 522);
             this.panelRegistros.TabIndex = 0;
             // 
+            // pessoasToolStripMenuItem
+            // 
+            this.pessoasToolStripMenuItem.Name = "pessoasToolStripMenuItem";
+            this.pessoasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pessoasToolStripMenuItem.Text = "Pessoas";
+            this.pessoasToolStripMenuItem.Click += new System.EventHandler(this.pessoasToolStripMenuItem_Click);
+            // 
             // TelaPrincipalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -242,5 +251,6 @@
         public System.Windows.Forms.ToolStripMenuItem pedidosMenuItem;
         public System.Windows.Forms.ToolStripMenuItem produtosMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastrosToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem pessoasToolStripMenuItem;
     }
 }

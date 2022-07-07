@@ -27,9 +27,9 @@ namespace DeliveryFaculdade.WinApp.ModuloProduto
         {
             var colunas = new DataGridViewColumn[]
             {
-                new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Número"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Id", HeaderText = "Número"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Nome", HeaderText = "Nome da Pessoa"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Nome", HeaderText = "Nome do Produto"},
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Preco", HeaderText = "Preço"},
 
@@ -43,12 +43,7 @@ namespace DeliveryFaculdade.WinApp.ModuloProduto
 
         public void AtualizarRegistros(List<Produto> produtos)
         {
-            grid.Rows.Clear();
-
-            foreach (Produto p in produtos)
-            {
-                grid.Rows.Add(p.Id, p.Nome, p.Preco, p.Quantidade);
-            }
+            grid.DataSource = produtos;
         }
 
         public object ObtemNumeroProdutoSelecionado()

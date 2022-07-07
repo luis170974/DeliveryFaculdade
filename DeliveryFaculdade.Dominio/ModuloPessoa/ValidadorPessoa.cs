@@ -8,7 +8,7 @@ namespace DeliveryFaculdade.Dominio.ModuloPessoa
     {
         public ValidadorPessoa()
         {
-            RuleFor(x => x.Nome)
+            RuleFor(x => x.NomePessoa)
                 .NotNull()
                 .NotEmpty();
 

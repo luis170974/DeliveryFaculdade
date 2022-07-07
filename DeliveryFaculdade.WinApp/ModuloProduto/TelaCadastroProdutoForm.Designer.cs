@@ -66,6 +66,7 @@
             this.txbNome.Name = "txbNome";
             this.txbNome.Size = new System.Drawing.Size(226, 23);
             this.txbNome.TabIndex = 2;
+            this.txbNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbNome_KeyPress);
             // 
             // label2
             // 
@@ -95,6 +96,7 @@
             this.txbQuantidade.Name = "txbQuantidade";
             this.txbQuantidade.Size = new System.Drawing.Size(62, 23);
             this.txbQuantidade.TabIndex = 6;
+            this.txbQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbQuantidade_KeyPress);
             // 
             // btnCancelar
             // 
@@ -106,7 +108,7 @@
             this.btnCancelar.TabIndex = 15;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.btnCancelar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // btnGravar
             // 
@@ -126,6 +128,7 @@
             this.txbPreco.Name = "txbPreco";
             this.txbPreco.Size = new System.Drawing.Size(130, 23);
             this.txbPreco.TabIndex = 16;
+            this.txbPreco.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbPreco_KeyPress);
             // 
             // label3
             // 
