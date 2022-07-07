@@ -13,34 +13,11 @@ namespace DeliveryFaculdade.Infra.Arquivos.ModuloPedido
 
 
         private const string sqlInserir =
-        @"INSERT INTO [TBPEDIDO]
-                (
-                    TIPO_PEDIDO,
-                    PESSOA_ID,
-                    VALORPEDIDO,
-                    DATAPEDIDO
-                )
-            VALUES
-                (
-                    @TIPO_PEDIDO,
-                    @PESSOA_ID,
-                    @VALORPEDIDO,
-                    @DATAPEDIDO
 
-                ); 
-                SELECT SCOPE_IDENTITY();";
 
-        private const string sqlEditar = @"UPDATE[TBPEDIDO] SET
+        private const string sqlEditar = 
 
-                    TIPO_PEDIDO = @TIPO_PEDIDO,
-                    PESSOA_ID   = @PESSOA_ID,
-                    VALORPEDIDO = @VALORPEDIDO,
-                    DATAPEDIDO  = @DATAPEDIDO
-
-                   WHERE
-                         ID = @ID";
-
-        private const string sqlExcluir = @"DELETE FROM TBPEDIDO WHERE ID = @ID";
+        private const string sqlExcluir = 
 
         private const string sqlSelecionarPorId = @"SELECT * FROM TBPEDIDO WHERE ID = @ID";
 
@@ -76,17 +53,71 @@ namespace DeliveryFaculdade.Infra.Arquivos.ModuloPedido
 
         protected override void InserirRegistroBancoDados(Pedido entidade)
         {
-            throw new NotImplementedException();
+            sql = @"INSERT INTO [TBPEDIDO]
+                (
+                    TIPO_PEDIDO,
+                    PESSOA_ID,
+                    PRODUTO_ID,
+                    VALORPEDIDO,
+                    DATAPEDIDO
+                )
+            VALUES
+                (
+                    @TIPO_PEDIDO,
+                    @PESSOA_ID,
+                    @PRODUTO_ID,
+                    @VALORPEDIDO,
+                    @DATAPEDIDO
+
+                ); 
+                SELECT SCOPE_IDENTITY();";
+
+            SqlCommand cmd_Insercao = new(sql, conexao);
+
+            DefinirParametros(entidade, cmd_Insercao);
+
+            entidade.Id = Convert.ToInt32(cmd_Insercao.ExecuteScalar());
+
+            DesconectarBancoDados();
         }
 
         protected override void EditarRegistroBancoDados(Pedido entidade)
         {
-            throw new NotImplementedException();
+            ConectarBancoDados();
+
+            sql = @"UPDATE[TBPEDIDO] SET
+
+                    TIPO_PEDIDO = @TIPO_PEDIDO,
+                    PESSOA_ID   = @PESSOA_ID,
+                    PRODUTO_ID   = @PRODUTO_ID,
+                    VALORPEDIDO = @VALORPEDIDO,
+                    DATAPEDIDO  = @DATAPEDIDO
+
+                   WHERE
+                         ID = @ID";
+
+            SqlCommand cmd_Edicao = new(sql, conexao);
+
+            DefinirParametros(entidade, cmd_Edicao);
+
+            cmd_Edicao.ExecuteNonQuery();
+
+            DesconectarBancoDados();
         }
 
         protected override void ExcluirRegistroBancoDados(Pedido entidade)
         {
-            throw new NotImplementedException();
+            ConectarBancoDados();
+
+            sql = @"DELETE FROM TBPEDIDO WHERE ID = @ID";
+
+            SqlCommand cmd_Exclusao = new(sql, conexao);
+
+            cmd_Exclusao.Parameters.AddWithValue("ID", entidade.Id);
+
+            cmd_Exclusao.ExecuteNonQuery();
+
+            DesconectarBancoDados();
         }
 
         protected override void DefinirParametros(Pedido entidade, SqlCommand cmd_Insercao)
@@ -97,7 +128,7 @@ namespace DeliveryFaculdade.Infra.Arquivos.ModuloPedido
 
         protected override ValidationResult Validar(Pedido entidade)
         {
-            throw new NotImplementedException();
+            return new ValidadorPedido().Validate(entidade);
         }
 
         protected override List<Pedido> LerTodos(SqlDataReader leitor)
