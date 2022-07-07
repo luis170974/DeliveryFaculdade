@@ -109,10 +109,5 @@ namespace DeliveryFaculdade.Infra.Arquivos.ModuloPedido
         {
             throw new NotImplementedException();
         }
-
-        protected override bool VerificarDuplicidade(string novoTexto)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

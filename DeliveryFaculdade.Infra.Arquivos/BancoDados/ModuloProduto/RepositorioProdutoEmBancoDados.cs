@@ -151,8 +151,6 @@ namespace DeliveryFaculdade.Infra.BancoDados.ModuloProduto
 
             DefinirParametros(entidade, cmd_Insercao);
 
-            cmd_Insercao.ExecuteNonQuery();
-
             entidade.Id = Convert.ToInt32(cmd_Insercao.ExecuteScalar());
 
             DesconectarBancoDados();
@@ -204,16 +202,6 @@ namespace DeliveryFaculdade.Infra.BancoDados.ModuloProduto
         protected override ValidationResult Validar(Produto entidade)
         {
             return new ValidadorProduto().Validate(entidade);
-        }
-
-        protected override bool VerificarDuplicidade(string novoTexto)
-        {
-            var todos = SelecionarTodos();
-
-            if (todos.Count != 0)
-                return todos.Exists(x => x.Equals(novoTexto));
-
-            return false;
         }
 
         #endregion

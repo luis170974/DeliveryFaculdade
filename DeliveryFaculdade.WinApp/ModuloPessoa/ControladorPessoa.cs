@@ -89,7 +89,7 @@ namespace DeliveryFaculdade.WinApp.ModuloPessoa
         {
             var numeroPessoa = tabelaPessoas.ObtemNumeroPessoaSelecionada();
 
-            return repositorioPessoa.Selecionar((int)numeroPessoa);
+            return repositorioPessoa.SelecionarUnico((int)numeroPessoa);
         }
 
         public override ConfiguracaoToolboxBase ObtemConfiguracaoToolbox()

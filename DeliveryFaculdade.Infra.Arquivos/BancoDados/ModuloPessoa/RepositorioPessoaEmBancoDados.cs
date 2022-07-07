@@ -182,8 +182,6 @@ namespace DeliveryFaculdade.Infra.BancoDados.ModuloPessoa
 
             DefinirParametros(entidade, cmd_Insercao);
 
-            cmd_Insercao.ExecuteNonQuery();
-
             entidade.Id = Convert.ToInt32(cmd_Insercao.ExecuteScalar());
 
             DesconectarBancoDados();
@@ -251,16 +249,6 @@ namespace DeliveryFaculdade.Infra.BancoDados.ModuloPessoa
         protected override ValidationResult Validar(Pessoa entidade)
         {
             return new ValidadorPessoa().Validate(entidade);
-        }
-
-        protected override bool VerificarDuplicidade(string novoTexto)
-        {
-            var todos = SelecionarTodos();
-
-            if (todos.Count != 0)
-                return todos.Exists(x => x.Equals(novoTexto));
-
-            return false;
         }
 
         #endregion
